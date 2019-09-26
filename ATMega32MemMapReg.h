@@ -3,6 +3,9 @@
  *
  * Created: 9/2019
  * Author:  Ahmed Yehia
+ * note:    This file causes violation in another files of MISRA rule (11.3/A)
+ *          "A cast should not be performed between a pointer type and an integral type"
+ *          in order to be able to access specific memory address
  ***********************************************************************************************************************/
 #ifndef ATMEGA32MEMMAPREG_H_
 #define ATMEGA32MEMMAPREG_H_
