@@ -16,14 +16,15 @@
 /*******************************************************************************************************************
  * definition(s)
  *******************************************************************************************************************/
-#define REG(TYPE, ADDR)                     ((*(volatile (TYPE) *) (ADDR)))
+#define REG(TYPE, ADDR)                         (*(volatile ((TYPE)*)) (ADDR))
 
-#define GET_BIT(TYPE, REG, BIT)             ((TYPE)((REG) >> (BIT)) & 1u)
-#define SET_BIT(TYPE, REG, BIT)             ((REG) |= (TYPE)(1u << (BIT)))
-#define CLEAR_BIT(TYPE, REG, BIT)           ((REG) &= (TYPE)(~(TYPE)(1u << (BIT))))
-#define TOGGLE_BIT(TYPE, REG, BIT)          ((REG) ^= (TYPE)(1u << (BIT)))
+#define GET_BIT(TYPE, REG, BIT)             ( (TYPE)(((REG) >> (BIT)) & 1u) )
+#define SET_BIT(TYPE, REG, BIT)             ( (REG) |= (TYPE)(1u << (BIT)) )
+#define CLEAR_BIT(TYPE, REG, BIT)           ( (REG) &= (TYPE)(~(TYPE)(1u << (BIT))) )
+#define TOGGLE_BIT(TYPE, REG, BIT)          ( (REG) ^= (TYPE)(1u << (BIT)) )
 
-#define WRITE_REG(TYPE, REG, MASK, VALUE)   ((REG) = ((REG) & (TYPE)(~(MASK))) | ((VALUE) & (MASK)))
+#define WRITE_REG(TYPE, REG, MASK, VALUE)   ( (REG) = ((REG) & (TYPE)(~(MASK))) | ((VALUE) & (MASK)) )
+#define READ_REG(TYPE, REG, MASK)           ( (TYPE)((REG) & (MASK)) )
 /*******************************************************************************************************************
  * type definition(s)
  *******************************************************************************************************************/
