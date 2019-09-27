@@ -92,9 +92,9 @@ extern DIO_enmStatus_t DIO_enmInit(void)
                       DIO_strConfiguration_arr[Init_l_u8Counter].m_enmDirection
                      );
             DIO_strPrivateConfiguration_arr[Init_l_u8Counter].m_u8LeastSignificantPinNumber = 0u;
-            for(Init_l_u8Counter2 = 0u; Init_l_u8Counter2 < (DIO_NUMBER_OF_PORT_PINS - 1u); Init_l_u8Counter2++)
+            for(Init_l_u8Counter2 = 0u; Init_l_u8Counter2 < DIO_NUMBER_OF_PORT_PINS; Init_l_u8Counter2++)
             {
-                if((DIO_strConfiguration_arr[Init_l_u8Counter].m_u8Mask & ((uint8_t)((uint8_t)1u << Init_l_u8Counter2))) == 1u)
+                if((DIO_strConfiguration_arr[Init_l_u8Counter].m_u8Mask & ((uint8_t)((uint8_t)1u << Init_l_u8Counter2))) != 0u)
                 {
                     if(DIO_strPrivateConfiguration_arr[Init_l_u8Counter].m_u8LeastSignificantPinNumber == 0u)
                     {
