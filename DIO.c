@@ -225,7 +225,7 @@ extern DIO_enmStatus_t DIO_enmFlip(DIO_enmName_t a_enmName)
                   uint8_t,
                   *(DIO_strPrivateConfiguration_arr[a_enmName].m_u8PortRegister_ptr),
                   DIO_strConfiguration_arr[a_enmName].m_u8Mask,
-                  (*(DIO_strPrivateConfiguration_arr[a_enmName].m_u8PortRegister_ptr)) ^ 1u
+                  (*(DIO_strPrivateConfiguration_arr[a_enmName].m_u8PortRegister_ptr)) ^ 0xFFu
                  );
     }
     return Flip_l_enmReturnValue;

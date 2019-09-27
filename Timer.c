@@ -291,6 +291,7 @@ Timer_enmStatus_t Timer_enmDelayBlocking(Timer_enmName_t a_enmName, Timer_enmPer
             DelayBlocking_l_PrescalerValue = TIMER_PRESCALER_CPU_CLOCK;
             break;
         case TIMER_PERIOD_1_MILLI_SECOND:
+			/* why 250? it should be 125!! */
             DelayBlocking_l_OutputCompareValue = 250u;
             DelayBlocking_l_PrescalerValue = TIMER_PRESCALER_64;
             break;
