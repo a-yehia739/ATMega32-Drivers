@@ -1,34 +1,40 @@
 /*******************************************************************************************************************
- * CommonMacros.h
+ * SOS.h
  *
  * Created: 9/2019
  * Author:  Ahmed Yehia
- * note:    This file violates MISRA rule (19.7/A)
- *          "A function should be used in preference to a function-like macro"
- *          in order to achieve faster running-time performance
  *******************************************************************************************************************/
-#ifndef COMMONMACROS_H_
-#define COMMONMACROS_H_
+#ifndef SOS_H_
+#define SOS_H_
 /*******************************************************************************************************************
  * include(s)
  *******************************************************************************************************************/
-#include"StandardTypes.h"
+#include "CommonHeaders.h"
+#include "SOS_cfg.h"
 /*******************************************************************************************************************
  * definition(s)
  *******************************************************************************************************************/
-#define REG(TYPE, ADDR)                     (*(TYPE) (ADDR))
-
-#define GET_BIT(TYPE, REG, BIT)             ( (TYPE)(((REG) >> (BIT)) & 1u) )
-#define SET_BIT(TYPE, REG, BIT)             ( (REG) |= (TYPE)(1u << (BIT)) )
-#define CLEAR_BIT(TYPE, REG, BIT)           ( (REG) &= (TYPE)(~(TYPE)(1u << (BIT))) )
-#define TOGGLE_BIT(TYPE, REG, BIT)          ( (REG) ^= (TYPE)(1u << (BIT)) )
-
-#define WRITE_REG(TYPE, REG, MASK, VALUE)   ( (REG) = ((REG) & (TYPE)(~(MASK))) | ((VALUE) & (MASK)) )
-#define READ_REG(TYPE, REG, MASK)           ( (TYPE)((REG) & (MASK)) )
+typedef enum
+{
+	SOS_OK,
+	SOS_NOT_OK
+}SOS_enmStatus_t;
+typedef enum
+{
+    SOS_TASK_STATE_READY,
+    SOS_TASK_STATE_RUN,
+    SOS_TASK_STATE_WAIT,
+    SOS_TASK_STATE_DELETE
+}SOS_enmTaskState_t;
 /*******************************************************************************************************************
  * type definition(s)
  *******************************************************************************************************************/
-
+typedef struct
+{
+	uint16_t m_u16Period;
+	void (*m_vCallBackFunction_ptr)(void);
+	SOS_enmTaskState_t m_enmState;
+}SOS_strTask_t;
 /*******************************************************************************************************************
  * external variable(s)
  *******************************************************************************************************************/
@@ -36,4 +42,8 @@
 /*******************************************************************************************************************
  * external function prototype(s)
  *******************************************************************************************************************/
-#endif /* COMMONMACROS_H_ */
+extern SOS_enmStatus_t SOS_enmInit(void);
+extern SOS_enmStatus_t SOS_enmCreateTask(SOS_enmTaskName_t a_enmName, uint16_t a_u16Period, void (*a_vCallBackFunction_ptr)(void));
+extern SOS_enmStatus_t SOS_enmDeleteTask(SOS_enmTaskName_t a_enmName);
+extern SOS_enmStatus_t SOS_enmRun(void);
+#endif /* SOS_H_ */

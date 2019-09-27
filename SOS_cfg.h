@@ -1,34 +1,34 @@
 /*******************************************************************************************************************
- * CommonMacros.h
+ * SOS_cfg.h
  *
  * Created: 9/2019
  * Author:  Ahmed Yehia
- * note:    This file violates MISRA rule (19.7/A)
- *          "A function should be used in preference to a function-like macro"
- *          in order to achieve faster running-time performance
  *******************************************************************************************************************/
-#ifndef COMMONMACROS_H_
-#define COMMONMACROS_H_
+#ifndef SOS_CFG_H_
+#define SOS_CFG_H_
 /*******************************************************************************************************************
  * include(s)
  *******************************************************************************************************************/
-#include"StandardTypes.h"
+
 /*******************************************************************************************************************
  * definition(s)
  *******************************************************************************************************************/
-#define REG(TYPE, ADDR)                     (*(TYPE) (ADDR))
+#define SOS_ERROR_DETECT	1
 
-#define GET_BIT(TYPE, REG, BIT)             ( (TYPE)(((REG) >> (BIT)) & 1u) )
-#define SET_BIT(TYPE, REG, BIT)             ( (REG) |= (TYPE)(1u << (BIT)) )
-#define CLEAR_BIT(TYPE, REG, BIT)           ( (REG) &= (TYPE)(~(TYPE)(1u << (BIT))) )
-#define TOGGLE_BIT(TYPE, REG, BIT)          ( (REG) ^= (TYPE)(1u << (BIT)) )
-
-#define WRITE_REG(TYPE, REG, MASK, VALUE)   ( (REG) = ((REG) & (TYPE)(~(MASK))) | ((VALUE) & (MASK)) )
-#define READ_REG(TYPE, REG, MASK)           ( (TYPE)((REG) & (MASK)) )
+#define SOS_SYSTEM_TIMER	(TIMER_SYSTICK)
+#define SOS_SYSTEM_TICK     (TIMER_PERIOD_1_MILLI_SECOND)
 /*******************************************************************************************************************
  * type definition(s)
  *******************************************************************************************************************/
-
+typedef enum
+{
+	/*......................................................................................*/
+	/* name the task(s) to be used below (IN ORDER starting from the higher priority) */
+	SOS_TASK0,
+	SOS_TASK1,
+	/*......................................................................................*/
+	SOS_NUMBER_OF_TASKS
+}SOS_enmTaskName_t;
 /*******************************************************************************************************************
  * external variable(s)
  *******************************************************************************************************************/
@@ -36,4 +36,4 @@
 /*******************************************************************************************************************
  * external function prototype(s)
  *******************************************************************************************************************/
-#endif /* COMMONMACROS_H_ */
+#endif /* SOS_CFG_H_ */

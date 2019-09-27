@@ -1,39 +1,40 @@
 /*******************************************************************************************************************
- * CommonMacros.h
+ * Timer_Lcfg.c
  *
  * Created: 9/2019
  * Author:  Ahmed Yehia
- * note:    This file violates MISRA rule (19.7/A)
- *          "A function should be used in preference to a function-like macro"
- *          in order to achieve faster running-time performance
  *******************************************************************************************************************/
-#ifndef COMMONMACROS_H_
-#define COMMONMACROS_H_
 /*******************************************************************************************************************
  * include(s)
  *******************************************************************************************************************/
-#include"StandardTypes.h"
+#include "Timer.h"
 /*******************************************************************************************************************
- * definition(s)
+ * shared global variable(s)
  *******************************************************************************************************************/
-#define REG(TYPE, ADDR)                     (*(TYPE) (ADDR))
-
-#define GET_BIT(TYPE, REG, BIT)             ( (TYPE)(((REG) >> (BIT)) & 1u) )
-#define SET_BIT(TYPE, REG, BIT)             ( (REG) |= (TYPE)(1u << (BIT)) )
-#define CLEAR_BIT(TYPE, REG, BIT)           ( (REG) &= (TYPE)(~(TYPE)(1u << (BIT))) )
-#define TOGGLE_BIT(TYPE, REG, BIT)          ( (REG) ^= (TYPE)(1u << (BIT)) )
-
-#define WRITE_REG(TYPE, REG, MASK, VALUE)   ( (REG) = ((REG) & (TYPE)(~(MASK))) | ((VALUE) & (MASK)) )
-#define READ_REG(TYPE, REG, MASK)           ( (TYPE)((REG) & (MASK)) )
+/*..................................................................................
+ * name:            Timer_strConfiguration_arr
+ * description:     array of configuration structures for Timer module
+ * members:         m_enmNumber -> number of the timer
+ *..................................................................................*/
+const Timer_enmNumber_t Timer_enmConfiguration_arr[TIMER_NUMBER_OF_TIMERS] =
+{
+    /* write the configuration below */
+    TIMER_NUMBER_0,
+    TIMER_NUMBER_2
+    /* write the configuration above */
+};
 /*******************************************************************************************************************
- * type definition(s)
+ * static global variable(s)
  *******************************************************************************************************************/
 
 /*******************************************************************************************************************
- * external variable(s)
+ * ISR & static function prototype(s)
  *******************************************************************************************************************/
 
 /*******************************************************************************************************************
- * external function prototype(s)
+ * shared function definition(s)
  *******************************************************************************************************************/
-#endif /* COMMONMACROS_H_ */
+
+/*******************************************************************************************************************
+ * ISR & static function definition(s)
+ *******************************************************************************************************************/
